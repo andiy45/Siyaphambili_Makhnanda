@@ -1,0 +1,118 @@
+/*grid layout*/
+
+/* Main content becomes a 2-column grid */
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    grid-auto-rows: 1fr;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+}
+
+/* Welcome, stats and action buttons span full width */
+.welcome,
+.stats,
+.councillor-actions {
+    grid-column: 1 / -1;
+}
+
+/* Stats also uses a grid internally (3 columns) */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Content cards sit in the grid */
+.content-card {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e6ddd2;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+}
+
+/* Colored top accent bar for each card */
+.content-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+}
+
+/* Different accent color per card */
+.content-card:nth-of-type(1)::before { background-color: #2c7a7b; } /* Recent Issues - teal */
+.content-card:nth-of-type(2)::before { background-color: #b08d57; } /* Notices - gold */
+.content-card:nth-of-type(3)::before { background-color: #388e3c; } /* Meetings - green */
+
+/* Colored headings to match the accent bars */
+.content-card:nth-of-type(1) .section-heading h2 { color: #2c7a7b; }
+.content-card:nth-of-type(2) .section-heading h2 { color: #b08d57; }
+.content-card:nth-of-type(3) .section-heading h2 { color: #388e3c; }
+
+/* card inner content padding similar to manager dashboard */
+.content-card .card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-tag {
+    display: inline-block;
+    background: #f8f4ee;
+    color: #4b1f2a;
+    font: 700 .7rem Arial, sans-serif;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    width: fit-content;
+}
+
+.card-btn {
+    display: inline-block;
+    text-align: center;
+    background: transparent;
+    color: #4b1f2a;
+    border: 1px solid #4b1f2a;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font: 700 .8rem Arial, sans-serif;
+    text-decoration: none;
+    width: fit-content;
+    margin-left: auto;
+}
+
+.content-card .card-btn:hover { background: #4b1f2a; color: #fff; }
+
+/* ---------- HIDE CONTEXT ---------- */
+.section-heading a {
+    display: none;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 800px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .content-card {
+        grid-column: 1 / -1;
+    }
+}

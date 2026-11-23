@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Municipality</title>
+<style>
+body{
+    background-color: #f6efe6;
+    font-family: sf pro display, sans-serif;
+    
+    }
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/*Header*/
+header{
+    margin: 0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    align-items: center;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    height: 120px;
+    width: 100%;
+    padding: 20px 60px;
+    box-sizing: border-box;
+}
+
+
+/*Navigation*/
+
+nav {
+    background: #4b1f2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+
+
+nav ul li {
+    margin: 0;
+}
+
+
+nav ul li a {
+    display: block;
+    padding: 18px 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+nav ul li a:hover, .authentication a:hover {
+    background: #e0d5ca;
+    color: #FFFFFF;
+}
+
+.councilors { 
+    width: 90%; 
+    max-width: 1100px; 
+    margin: 40px auto; 
+    border-collapse: separate; 
+    border-spacing: 0 20px; 
+} 
+
+/* Each row becomes a card */ 
+.councilors tr { 
+    background-color: #ffffff; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+    border-radius: 12px; 
+} 
+
+/* Image/name column */ 
+.councilors td:first-child { 
+    width: 30%; 
+    text-align: center; 
+    padding: 25px; 
+    color: #4b1f2a; 
+    font-weight: bold; 
+    font-size: 16px; 
+} 
+
+/* Councillor information column */ 
+.councilors td:last-child { 
+    width: 70%; 
+    padding: 25px 30px; 
+    color: #333333; 
+    font-size: 14px; 
+    line-height: 1.8; 
+    white-space: pre-line; 
+} 
+
+/* Councillor images */ 
+.councilors img { 
+    display: block; 
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 50%; 
+    margin: 0 auto 15px; 
+    border: 5px solid #f6efe6; 
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); 
+} 
+
+/* Hover effect */ 
+.councilors tr { 
+    transition: 0.3s ease; 
+} 
+
+.councilors tr:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13); 
+}
+
+/* COUNCILLOR NAME  */ 
+.councilors td:last-child::first-line { 
+    font-weight: bold; 
+    color: #4b1f2a; 
+}
+
+/*Footer*/
+
+        footer {
+            background-color: #4b1f2a;
+            color: white;
+            padding: 30px 50px 10px;
+        }
+
+        .footer-container{
+            display:flex;
+            justify-content: space-between;
+            gap:30px;
+        }
+
+        .footer-sec{
+            flex:1;
+        }
+
+        .footer-sec a{
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-sec a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-sec img {
+            width: 145px;
+            height: 145px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer-sec img:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-footer {
+            background-color: #6B2F3A;
+            text-align: center;
+            padding: 15px;
+            color: white;
+        }
+
+        .bottom-footer p {
+            margin: 0;
+            color: #ffff;
+        } 
+
+        section nav {
+            height: 60%;
+            background-color: #f6efe6;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Header -->
+<header>
+
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="Home Landing Page.html">Home</a></li>
+            <li><a href="about.html">About Municipality</a></li>
+            <li><a href="reportfault.html">Report Fault</a></li>
+            <li><a href="trackfault.html">Track Fault</a></li>
+            <li><a href="viewreports.html">View Reports</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li><a href="help.html">Help/FAQs</a></li>
+        </ul>
+    </nav>
+
+<table class="councilors">
+
+    <tr>
+        <td><img src="executive mayor.jpg">Executive Mayor</td>
+        <td>CLLR. YANDISWA VARA
+            Executive Mayor
+            Political Party: ANC
+            Contact: 046 603 6133
+            Email: yvara@makana.gov.za</td>
+    </tr>
+    <tr>
+        <td><img src="SpeakerC.jpg">Speaker Councilor</imgsrc></td>
+        <td>CLLR. MABHUTI MATYUMZA
+            Speaker of the Council
+            Political Party: ANC
+            Tel: 046 603 6169
+            Email: OfficeOfTheSpeaker@makana.gov.za</td>
+    </tr>
+
+    <tr>
+        <td><img src="ward1.jpg">Councilor 1</td>
+        <td>CLLR. PHUMELELE PETER
+            Ward 1 Councillor
+            Political Party: ANC
+            Cell: 078 794 6992
+            Email: pphumelele561@gmail.com
+            ppeter@makana.gov.za</td>
+    </tr>
+
+    <tr>
+        <td><img src="ward2.jpg">Councillor 2</td>
+        <td>CLLR. Rumsell Mpumzi Xonxa
+            Ward 2 Councillor
+            Political Party: ANC
+            Cell: 082 932 1304
+            Email: ramiexonxa@yahoo.com
+            rxonxa@makana.gov.za
+        </td>
+    </tr>
+
+    <tr>
+        <td><img src="ward3.jpg">Councillor 3</td>
+        <td>CLLR. ANDILE HOYI
+            Ward 3 Councillor
+            Political Party: ANC
+            Cell: 078 285 3179
+            Email: andilehoyi@yahoo.com
+            zhoyi@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward4.jpg">Councillor 4</td>
+        <td>CLLR. GEOFFREY EMBLING
+            Ward 4 Councillor
+            Political Party: DA
+            Cell: 081 712 8975
+            Email: geoffembling@gmail.com
+            gembling@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward5.png">Councillor 5</td>
+        <td>CLLR. GCOBISA MENE
+            Ward 5 Councillor
+            Political Party: ANC
+            Cell: 078 204 8522
+            Email: gbmene@yahoo.com
+            gmene@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward6.jpg">Councillor 6</td>
+        <td>CLLR. VUYANI JEZI
+            Ward 6 Councillor
+            Political Party: ANC
+            Cell: 083 337 7754
+            Email: vuyanijezzz@gmail.com
+            vjezi@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward7.jpg">Councillor 7</td>
+        <td>CLLR. LUNGA MASINDA
+            Ward 7 Councillor
+            Political Party: ANC
+            Cell: 073 904 7315
+            Email: thandayi126@gmail.com
+            lmasinda@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward8.jpg">Councillor 8</td>
+        <td>CLLR. CARY CLARK
+            Ward 8 Councillor
+            Political Party: DA
+            Cell: 074 618 8747
+            Email: cary@imaginet.co.za
+            caryclark@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward9.jpg">Councillor 9</td>
+        <td>CLLR. THOZAMILE YAKA
+            Ward 9 Councillor
+            Political Party: ANC
+            Cell: 078 269 2338
+            Email: thozamileyaka184@gmail.com</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward10.jpg">Councillor 10</td>
+        <td>CLLR. ANDILE MBEJI
+            Ward 10 Councillor
+            Political Party: ANC
+            Tel: 083 663 4413
+            Email: ambeji@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward11.jpg">Councillor 11</td>
+        <td>CLLR. SAKHIWO ZONO
+            Ward 11 Councillor
+            Political Party: ANC
+            Cell: 063 064 6048
+            Email: sakhiwozono@gmail.com
+            szono@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward 12.jpg">Councillor 12</td>
+        <td>
+            CLLR. MZOBANZI NKWENTSHA
+            Ward 12 Councillor
+            Political Party: ANC
+            Cell: 078 143 7349
+            Email: mzobanzimzobanzi1@gmail.com
+            mnkwentsha@makana.gov.za</td>
+    </tr>
+
+        <tr>
+        <td><img src="ward13.jpg">Councillor 13</td>
+        <td>CLLR. WANDISILE MATINA
+            Ward 13 Councillor
+            Political Party: ANC
+            Cell: 076 993 0660
+            Email: wandisile.matina78@gmail.com
+            wmatina@makana.gov.za
+        </td>
+    </tr>
+
+        <tr>
+        <td><img src="ward14.jpg">Councillor 14</td>
+        <td>
+            CLLR. VUYANI NESI
+            Ward 14 Councillor
+            Political Party: INDEPENDENT
+            Cell: 078 126 5684
+            Email: vnesi@makana.gov.za</td>
+    </tr>
+
+</table>
+    
+<!--Footer-->
+<footer>
+
+
+    <div class="footer-container">
+
+        <div class="footer-sec">
+            <h3>CONTACT US</h3>
+            <p>Tel: <a href="">046 603 6731</a></p>
+            <p>Email: <a href="">info@makanamunicipality.gov.za</a></p>
+            <p>Postal Address: 1921 High Street, Makhanda, 6139</p>
+            <p>WhatsApp Channel: <a href="">Join Channel</a></p>
+            <p>Facebook: <a href="">Makana_Municipality</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>ABOUT US</h3>
+            <p><a href="">Historical background</a></p>
+            <p><a href="">vision and Mission</a></p>
+            <p><a href="">Councilors</a></p>
+        </div>  
+
+        <div class="footer-sec">
+            <h3>Quick Links</h3>
+            <p><a href="">Vision and Mission</a></p>
+            <p><a href="">Track Fault</a></p>
+            <p><a href="">View Updates</a></p>
+            <p><a href="">Ward Reports</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>Physical Address</h3>
+            <a href="https://www.bing.com/maps/search?name=Makana+Local+Municipality+Makhanda&trfc=&mepi=0%7E%7EEmbedded%7ELargeMapLink&FORM=MPSRPL&style=r&q=Makana+Local+Municipality+Makhanda&ss=id.ypid%3AYN47AB9989AA88C9DA&ppois=-33.30935287475586_26.52762222290039_Makana+Local+Municipality+Makhanda&cp=-33.309353%7E26.527622&lvl=15">
+            <img src="google maps logo.jpg">
+            </a>
+        </div>  
+
+
+</footer>
+
+    <section class="bottom-footer">
+        <p>Brought to you by Makana Municipality in collaboration with MyMakhanda Tech.<br>
+        Makana Municipality Copyright @ 2026, All Rights Reserved.</p>
+    </section>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Landing Page</title>
+    <link rel="stylesheet" href="home landing page.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <!-- Navigation bar -->
+    <nav>
+        <ul class="main-nav">
+            <li><a href="Home Landing Page.html">Home</a></li>
+            <li><a href="about.html">About Municipality</a></li>
+            <li><a href="reportfault.html">Report Fault</a></li>
+            <li><a href="viewreports.html">View Reports</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+        </ul>
+    <!-- Right side of the navigation bar -->
+    <div class="nav-right">
+        <a href="register.html" class="register">Register</a>
+        <a href="login.html" class="login">LogIn</a>
+    </div>
+    </nav>
+</header>
+
+<!-- Welcome Banner -->
+<section class="welcome-banner">
+
+    <div class="banner-content">
+       <!--<p style="background-image: url('Grahamstown_from_the_Fort.jpg');">-->
+
+        <h1>Welcome to Makhanda </h1>
+
+        <h2>Your Community. Your Voice. Your Municipality.</h2>
+
+        <p>
+            Connecting citizens with local government services.
+            Report issues, track complaints, and stay informed.
+        </p>
+       <form class="search-box" onsubmit="searchWebsite(event)">
+        <input type="text" id="search" placeholder="Search the web">
+        <button type="submit" class="searchbutton">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+            </svg>
+        </button> 
+       </form>
+
+        <div class="banner-buttons">
+            <a href="reportfault.html" class="buttons primary-button">
+                Report a Service Issue
+            </a>
+
+            <a href="trackfault.html" class="buttons secondary-button">
+                Track My Report
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Statistics Section -->
+<section class="statistics">
+
+    <div class="stat-card">
+        <h2>125+</h2>
+        <p>Issues Reported</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>85</h2>
+        <p>Issues Resolved</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>14</h2>
+        <p>Wards Connected</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>90%</h2>
+        <p>Resolution Rate</p>
+    </div>
+
+</section>
+
+<!--Row 1 Info-->
+<section class="info-row">
+
+    <!-- Calendar -->
+    <div class="info-card">
+
+        <h3>📅 Calendar</h3>
+
+        <h4>August 2026</h4>
+
+        <div class="days">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+        </div>
+
+        <div class="dates">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+            <span>11</span>
+            <span>12</span>
+            <span>13</span>
+            <span>14</span>
+            <span>15</span>
+            <span>16</span>
+
+            <span>17</span>
+            <span>18</span>
+            <span>19</span>
+            <span>20</span>
+            <span>21</span>
+            <span>22</span>
+            <span>23</span>
+            <span>24</span>
+            <span class="today">25</span>
+            <span>26</span>
+            <span>27</span>
+            <span>28</span>
+            <span>29</span>
+            <span>30</span>
+            <span>31</span>
+        </div>
+
+    </div>
+
+    <!-- Weather -->
+    <div class="info-card weather">
+
+        <h3>🌤️ Makhanda Weather</h3>
+
+        <div class="weather-icon">
+            🌤️
+        </div>
+
+        <div class="temperature">
+            18°C
+        </div>
+
+        <p>Hazy Sunshine</p>
+
+        <p>📍 Makhanda, Eastern Cape</p>
+
+    </div>
+
+    <!-- Dam Levels -->
+    <div class="info-card dam-level">
+
+        <h3>💧 Dam Levels</h3>
+
+        <h4>Settlers Dam</h4>
+
+        <div class="dam-percentage">
+            72%
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <p>Current Water Level</p>
+
+        <span class="status">
+            Stable
+        </span>
+
+    </div>
+
+</section>
+
+<!--  NOTICE BOARD -->
+<section class="notice-board">
+
+    <div class="notice-heading">
+
+        <h2>Notice Board</h2>
+        <p>
+            Stay informed about important municipal announcements,
+            service updates and community information.
+        </p>
+    </div>
+
+
+    <div class="notice-container">
+
+
+        <!-- Notice 1 -->
+        <div class="notice-ticket">
+
+            <div class="notice_date">
+
+                <span class="date-day">26</span>
+                <span class="date-month">AUG </span>
+
+            </div>
+
+
+            <div class="notice_content">
+
+                <span class="notice_category">IMPORTANT NOTICE</span>
+
+                <h3> Planned Water Interruption</h3>
+
+                <p>
+                    Residents are advised that there will be a
+                    planned water interruption affecting selected
+                    areas of Makhanda.
+                </p>
+
+                <a href="#">Read More →</a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Notice 2 -->
+        <div class="notice-ticket">
+
+            <div class="notice_date">
+                <span class="date-day">28</span>
+                <span class="date-month">AUG</span>
+            </div>
+
+
+            <div class="notice_content">
+
+                <span class="notice_category">COMMUNITY</span>
+
+                <h3>Community Meeting</h3>
+
+                <p>
+                    Residents are invited to attend the upcoming
+                    community meeting to discuss local service
+                    delivery matters.
+                </p>
+
+                <a href="#">
+                    Read More →
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Notice 3 -->
+        <div class="notice-ticket">
+
+            <div class="notice_date">
+                <span class="date-day">30</span>
+                <span class="date-month"> AUG</span>
+            </div>
+
+
+            <div class="notice_content">
+
+                <span class="notice_category">SERVICE UPDATE</span>
+
+                <h3>Road Maintenance Update</h3>
+
+                <p>
+                    Road maintenance work will take place in selected
+                    areas. Residents are encouraged to use alternative
+                    routes where possible.
+                </p>
+
+                <a href="#">Read More →</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- View All Notices -->
+    <div class="notice-button-cont">
+        <a href="notice_manager.php" class="view_notices">
+            View All Notices
+        </a>
+    </div>
+</section>
+
+<!--Footer-->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-sec">
+            <h3>CONTACT US</h3>
+            <p>Tel: <a href="">046 603 6731</a></p>
+            <p>Email: <a href="">info@makanamunicipality.gov.za</a></p>
+            <p>Postal Address: 1921 High Street, Makhanda, 6139</p>
+            <p>WhatsApp Channel: <a href="">Join Channel</a></p>
+            <p>Facebook: <a href="">Makana_Municipality</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>ABOUT US</h3>
+            <p><a href="">Historical background</a></p>
+            <p><a href="">vision and Mission</a></p>
+            <p><a href="Councillors.html">Councilors</a></p>
+        </div>  
+
+        <div class="footer-sec">
+            <h3>Quick Links</h3>
+            <p><a href="">Vision and Mission</a></p>
+            <p><a href="">Track Fault</a></p>
+            <p><a href="">View Updates</a></p>
+            <p><a href="">Ward Reports</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>Physical Address</h3>
+            <a href="https://www.bing.com/maps/search?name=Makana+Local+Municipality+Makhanda&trfc=&mepi=0%7E%7EEmbedded%7ELargeMapLink&FORM=MPSRPL&style=r&q=Makana+Local+Municipality+Makhanda&ss=id.ypid%3AYN47AB9989AA88C9DA&ppois=-33.30935287475586_26.52762222290039_Makana+Local+Municipality+Makhanda&cp=-33.309353%7E26.527622&lvl=15">
+            <img src="google maps logo.jpg">
+            </a>
+        </div>  
+
+</footer>
+    <section class="bottom-footer">
+        <p>Brought to you by Makana Municipality in collaboration with MyMakhanda Tech.<br>
+        Makana Municipality Copyright @ 2026, All Rights Reserved.</p>
+    </section>
+<!--Javascript-->
+<script src="Calendar and Weather.js"></script>
+</script>
+</body>
+</html>

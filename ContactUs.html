@@ -1,0 +1,303 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <style>
+
+body{
+    background-color: #f6efe6;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    align-items: center;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/*Header*/
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 120px;
+    padding: 20px 60px;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+/*Navigation*/
+
+nav {
+    background: #4b1f2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    display: block;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 18px 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover, .authentication a:hover {
+    background: #e0d5ca;
+    color: #FFFFFF;
+}
+/*Contact Us*/
+
+.contacts{
+    width: 80%;
+    margin: 50px auto;
+}
+
+.contacts h2{
+    color: #4b1f2a;
+    font-weight: 500;
+    border-bottom: 2px solid #40a84b;
+}
+
+.contact-details, .municipal-contacts {
+    width: 50%;
+}
+
+.contact-details h3, .municipal-contacts h3 {
+    color: #4b1f2a;
+    font-size: 22px;
+    font-weight: 500;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #40a84b;
+    margin-bottom: 20px;
+}
+
+.contact-details p, .municipal-contacts p {
+    color: #222;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.contact-details td, .municipal-contacts td {
+    border: 1px solid #c9c9c9;
+    height: 40px;
+}
+
+.contact-details a, .municipal-contacts a {
+    color: #4B1F2A;
+    text-decoration: none;
+}
+
+.contact-details a:hover, .municipal-contacts a:hover {
+    color: #40a84b;
+    text-decoration: underline;
+}
+
+.contact-details table, .municipal-contacts table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+/*Footer*/
+        footer{
+            background-color: #4b1f2a;
+            color: white;
+            padding: 30px 50px 10px
+        }
+
+        .footer-container{
+            display:flex;
+            justify-content: space-between;
+            gap:30px;
+        }
+
+        .footer-sec{
+            flex:1;
+        }
+
+        .footer-sec a{
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-sec a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-sec img {
+            width: 145px;
+            height: 145px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer-sec img:hover {
+            transform: scale(1.05);
+        }
+
+        .bottom-footer {
+            background-color: #6B2F3A;
+            text-align: center;
+            padding: 15px;
+            color: white;
+        }
+
+        .bottom-footer p {
+            margin: 0;
+            color: #ffff;
+        } 
+
+        section nav {
+            height: 60%;
+            background-color: #f6efe6;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="site-header">
+    <!-- Navigation bar -->
+    <nav class="navigation" aria-label="Main Navigation">
+        <ul class="nav-list">
+            <li><a href="home 1.php">Home</a></li>
+            <li><a href="about.html">About Municipality</a></li>
+            <li><a href="reportfault.html">Report Fault</a></li>
+            <li><a href="trackfault.php">Track Fault</a></li>
+            <li><a href="">View Reports</a></li>
+        </ul>
+    </nav>
+</header>
+<!-- Contact Us Section -->
+<section class="contacts">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-details">
+        <h3>Contact Details</h3>
+        
+        <p>Municipal related issues (8am-5pm,Mon-Fri)</p>
+
+        <table>
+            <tr>
+                <td class="icon">☎</td>
+                <td>046 426 9682</td>
+            </tr>
+
+            <tr>
+                <td class="icon">✉</td>
+                <td><a href="mailto:info@makana.gov.za"> info@makana.gov.za</a></td>
+            </tr>
+        </table>
+
+            <p>Municipal related issues (8am-5pm,Mon-Fri)</p>
+
+        <table>
+            <tr>
+                <td class="icon">☎</td>
+                <td>046 603 6111</td>
+            </tr>
+
+            <tr>
+                <td class="icon">✉</td>
+                <td><a href="mailto:info@makanamunicipa.gov.za"> info@makana.gov.za</a></td>
+            </tr>
+        </table>
+    </div>
+<!-- Municipal Contacts Section -->
+    <div class="municipal-contacts">
+
+        <h3>Makana Municipality </h3>
+
+        <p>Makana Municipality can be contacted for municipal services, 
+            community enquiries and service-related issues.
+        </p>
+
+        <h4>Municipal Offices:</h4>
+        <p>
+            PO Box 176, Makhanda, 6140
+        </p>
+
+        <table>
+            <tr>
+                <td class="icon">☎</td>
+                <td>046 603 6111</td>
+            </tr>
+        </table>
+
+    </div>
+</section>
+
+<!--Footer-->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-sec">
+            <h3>CONTACT US</h3>
+            <p>Tel: <a href="">046 603 6731</a></p>
+            <p>Email: <a href="">info@makanamunicipality.gov.za</a></p>
+            <p>Postal Address: 1921 High Street, Makhanda, 6139</p>
+            <p>WhatsApp Channel: <a href="">Join Channel</a></p>
+            <p>Facebook: <a href="">Makana_Municipality</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>ABOUT US</h3>
+            <p><a href="">Historical background</a></p>
+            <p><a href="">vision and Mission</a></p>
+            <p><a href="">Councilors</a></p>
+        </div>  
+
+        <div class="footer-sec">
+            <h3>Quick Links</h3>
+            <p><a href="">Vision and Mission</a></p>
+            <p><a href="">Track Fault</a></p>
+            <p><a href="">View Updates</a></p>
+            <p><a href="">Ward Reports</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>Physical Address</h3>
+            <a href="https://www.bing.com/maps/search?name=Makana+Local+Municipality+Makhanda&trfc=&mepi=0%7E%7EEmbedded%7ELargeMapLink&FORM=MPSRPL&style=r&q=Makana+Local+Municipality+Makhanda&ss=id.ypid%3AYN47AB9989AA88C9DA&ppois=-33.30935287475586_26.52762222290039_Makana+Local+Municipality+Makhanda&cp=-33.309353%7E26.527622&lvl=15">
+            <img src="google maps logo.jpg">
+            </a>
+        </div>  
+
+</footer>
+    <section class="bottom-footer">
+        <p>Brought to you by Makana Municipality in collaboration with MyMakhanda Tech.<br>
+        Makana Municipality Copyright @ 2026, All Rights Reserved.</p>
+    </section>
+</body>
+</html>

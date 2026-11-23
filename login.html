@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Landing Page</title>
+    <link rel="stylesheet" href="home landing page.css">
+
+<style>
+
+/*GLOBAL RESETS*/
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                     "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: #1d1d1f;
+        background: #f5f5f7;
+    }
+
+    body {
+        padding-top: 65px;
+    }
+
+    .floating-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: 65px;
+        background: rgba(255, 255, 255, 0.97);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.99);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 25px;
+        z-index: 9999;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #4b1f2a;
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+    }
+
+    .brand:hover { 
+      opacity: 0.7; 
+    }
+    .brand-mark {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        display: block;
+        transition: transform 0.25s ease;
+    }
+
+    .brand:hover .brand-mark {
+        transform: rotate(-6deg) scale(1.05);
+    }
+
+    .brand-text {
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+    .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        list-style: none;
+        margin: 0 auto;
+        padding: 0;
+        height: 100%;
+    }
+
+    .main-nav > li {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .main-nav > li > a,
+    .main-nav > li > .dropdown-link {
+        text-decoration: none;
+        color: #4b1f2a;
+        font-size: 15px;
+        font-weight: 500;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+        transition: opacity 0.2s ease;
+    }
+
+    .main-nav > li > a:hover,
+    .main-nav > li > .dropdown-link:hover {
+        opacity: 0.65;
+    }
+
+    .nav-dropdown {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: 65px;                     /* 15px top + 65px bar height */
+        left: 0;
+        right: 0;
+        width: 100vw;
+        background: rgba(255, 255, 255, 0.97);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        padding: 30px 0;
+        display: inline-flex;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0s linear 0.25s;
+        z-index: 9999;
+    }
+
+    /* Invisible hover bridge - fills the gap between the nav bar
+       bottom (at 80px) and the top of the menu, so moving the mouse
+       down doesn't close the menu. */
+    .dropdown-menu::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: 0;
+        right: 0;
+        height: 20px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown.is-open .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0s linear 0s;
+    }
+
+    .dropdown-inner {
+        width: 92%;
+        max-width: 1200px;
+        padding: 0 25px;
+        display: flex;
+        gap: 60px;
+    }
+
+    .dropdown-menu.small-menu .dropdown-inner {
+        justify-content: flex-start;
+    }
+
+    /*DROPDOWN COLUMNS*/
+    .dropdown-column {
+        display: flex;
+        flex-direction: column;
+        min-width: 180px;
+    }
+
+    .dropdown-column h3 {
+        font-size: 12px;
+        font-weight: 600;
+        color: #4b1f2a;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 12px;
+    }
+
+    .dropdown-column a {
+        text-decoration: none;
+        color: #555;
+        font-size: 14px;
+        padding: 7px 0;
+        transition: color 0.2s, padding-left 0.2s;
+    }
+
+    .dropdown-column a:hover {
+        color: #661501;
+        padding-left: 5px;
+    }
+
+    /* PAGE DIM OVERLAY (Apple-style) */
+    .page-content {
+    transition: filter 0.35s ease, transform 0.35s ease;
+    transform-origin: top center;
+    will-change: filter;
+    }
+
+   /* Applied when a menu is open */
+    body.menu-open .page-content {
+    filter: blur(8px);
+    transform: scale(0.98);
+    pointer-events: none;   /* prevents clicking blurred content */
+    user-select: none;      /* prevents selecting blurred content */
+    }
+
+    .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+        z-index: 9997;
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+    }
+
+    body.menu-open .page-overlay {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 0.25s ease, visibility 0s linear 0s;
+    }
+
+    /*SEARCH BUTTON*/
+    .search-button {
+        background: transparent;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s ease;
+    }
+
+    .search-button:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .search-icon {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+
+    /* HAMBURGER MENU BUTTON */
+    .menu-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        color: #4b1f2a;
+        font-size: 26px;
+        cursor: pointer;
+        padding: 6px;
+        line-height: 1;
+    }
+
+ /*MOBILE*/
+    @media (max-width: 860px) {
+        .menu-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .floating-nav { padding: 0 16px; }
+
+        /* Hide the desktop row */
+        .main-nav { display: none; }
+
+        /* NEW: the mobile panel — a full-width sheet directly
+          under the floating bar */
+        .main-nav.is-open {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: fixed;                 
+            top: 65px;                       
+            left: 0;                        
+            right: 0;
+            width: 100vw;                 
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;                
+            background: rgba(255, 255, 255, 0.97);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            padding: 12px 20px;
+            gap: 0;
+            height: auto;
+            z-index: 9999;                   
+        }
+
+        .main-nav > li {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .main-nav > li > a,
+        .main-nav > li > .dropdown-link {
+            display: block;
+            padding: 12px 0;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            height: auto;
+            color: #4b1f2a;
+        }
+
+        /* Kill the full-width mega menu on mobile */
+        .dropdown-menu,
+        .dropdown-menu.small-menu {
+            position: static;
+            width: 100%;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            box-shadow: none;
+            backdrop-filter: none;
+            border-bottom: none;
+            padding: 0;
+            background: transparent;
+            display: none;
+        }
+
+        .dropdown-menu::before { display: none; }
+
+        .nav-dropdown.is-open .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-inner {
+            width: 100%;
+            padding: 0 0 12px 12px;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .dropdown-column h3 { margin-top: 10px; }
+
+        /* NEW: show hamburger, hide its rotation when closed */
+        .menu-toggle { display: inline-flex; }
+
+        .page-overlay { display: none; }
+    }
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+
+/* Main login section */
+.login_section {
+    min-height: calc(100vh - 65px);
+    padding: 110px 20px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f6efe6;
+    position: relative;
+}
+
+/* Soft background decoration */
+.login_section::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: rgba(75, 31, 42, 0.06);
+    top: 80px;
+    left: -180px;
+    pointer-events: none;
+}
+
+.login_section::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(64, 224, 208, 0.08);
+    bottom: 30px;
+    right: -130px;
+    pointer-events: none;
+}
+
+/* Login card */
+.login {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    padding: 45px 45px 40px;
+    border-radius: 24px;
+    box-shadow:
+        0 20px 50px rgba(75, 31, 42, 0.12),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(75, 31, 42, 0.06);
+}
+
+/* Heading */
+.login h2 {
+    margin: 0 0 12px;
+    color: #4b1f2a;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    text-align: center;
+}
+
+/* Description */
+.login > p {
+    margin: 0 0 32px;
+    text-align: center;
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Login form */
+.login form {
+    width: 100%;
+}
+
+/* Login table */
+.login-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 16px;
+}
+
+/* Table labels */
+.login-table td:first-child {
+    width: 115px;
+    padding-right: 15px;
+    color: #4b1f2a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+}
+
+/* Input cell */
+.login-table td:last-child {
+    width: auto;
+}
+
+/* Text and password inputs */
+.login-table input[type="text"],
+.login-table input[type="password"] {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+    border: 1px solid #d8d8d8;
+    border-radius: 12px;
+    background: #fafafa;
+    color: #1d1d1f;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Input focus */
+.login-table input[type="text"]:focus,
+.login-table input[type="password"]:focus {
+    background: #ffffff;
+    border-color: #4b1f2a;
+    box-shadow: 0 0 0 4px rgba(75, 31, 42, 0.08);
+}
+
+/* Placeholder */
+.login-table input::placeholder {
+    color: #999999;
+}
+
+
+/* Buttons row */
+.login-table tr:last-child td {
+    padding-top: 10px;
+}
+
+
+/* Login button */
+.login-button {
+    width: 100%;
+    height: 46px;
+    border: none;
+    border-radius: 12px;
+    background: #4b1f2a;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Login hover */
+.login-button:hover {
+    background: #661501;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 18px rgba(75, 31, 42, 0.20);
+}
+
+/* Login active */
+.login-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Reset button */
+.reset-button {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #d5d5d5;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #4b1f2a;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Reset hover */
+.reset-button:hover {
+    background: #f6efe6;
+    border-color: #4b1f2a;
+    transform: translateY(-1px);
+}
+
+/* Links underneath form */
+.login-links {
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid #eeeeee;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Forgot password link */
+.login-links a {
+    color: #4b1f2a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+/* Link hover */
+.login-links a:hover {
+    color: #661501;
+    text-decoration: underline;
+}
+
+/* Register text */
+.login-links span {
+    color: #777777;
+}
+
+/*  MOBILE LOGIN DESIGN */
+@media (max-width: 600px) {
+    .login_section {
+        min-height: calc(100vh - 65px);
+        padding: 95px 16px 60px;
+    }
+
+    .login {
+        max-width: 100%;
+        padding: 35px 22px 30px;
+        border-radius: 20px;
+    }
+
+    .login h2 {
+        font-size: 25px;
+    }
+
+    .login > p {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .login-table {
+        border-spacing: 0 13px;
+    }
+
+    .login-table tr:not(:last-child) {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .login-table tr:not(:last-child) td {
+        display: block;
+        width: 100%;
+    }
+
+    .login-table td:first-child {
+        padding: 0 0 7px;
+        font-size: 11px;
+    }
+
+    .login-table td:last-child {
+        width: 100%;
+    }
+
+    .login-table input[type="text"],
+    .login-table input[type="password"] {
+        height: 46px;
+    }
+
+    .login-table tr:last-child {
+        display: flex;
+        gap: 10px;
+    }
+
+    .login-table tr:last-child td {
+        width: 50%;
+    }
+
+    .login-links {
+        font-size: 13px;
+    }
+}
+
+
+/* mobile*/
+
+@media (max-width: 380px) {
+    .login {
+        padding: 30px 18px 25px;
+    }
+    .login h2 {
+        font-size: 23px;
+    }
+    .login-table tr:last-child {
+        display: block;
+    }
+    .login-table tr:last-child td {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<header>
+    <!-- Navigation bar -->
+<!-- Dim overlay — sits behind the nav, in front of page content -->
+<div class="page-overlay" id="pageOverlay"></div>
+
+<nav class="floating-nav" aria-label="Main">
+
+    <!-- CENTER: Nav links -->
+    <ul class="main-nav" id="mainNav">
+
+        <li>
+            <a href="home 1.php">    <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <!-- Circle background -->
+        <circle cx="20" cy="20" r="20" fill="#4b1f2a"/>
+        <!-- Stylised "M" -->
+        <path d="M10 28 L10 14 L15 22 L20 14 L25 22 L30 14 L30 28"
+              fill="none" stroke="#ffffff" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    
+    </a>
+        </li>
+
+        <!-- ABOUT -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                About
+            </button>
+
+            <div class="dropdown-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>About Makana</h3>
+                        <a href="about.php">Vision and Mission</a>
+                        <a href="historicalbackground.php">History</a>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <h3>Governance</h3>
+                        <a href="ward councillors.php">Ward Councillors</a>
+                        <a href="departments.php">Municipal Departments</a>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <h3>Information</h3>
+                        <a href="notices.php">Municipal Notices</a>
+                        <a href="documents.php">Documents</a>
+                        <a href="updates.php">Municipal Updates</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- FAULT -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                Fault
+            </button>
+
+            <div class="dropdown-menu small-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>Report an Issue</h3>
+                        <a href="#">Report Fault</a>
+                        <a href="#">Track Fault</a>
+                        <a href="#">View Reports</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- SUPPORT -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                Support
+            </button>
+
+            <div class="dropdown-menu small-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>Contacts &amp; Map</h3>
+                        <a href="contact_us.html">Contact Us</a>
+                        <a href="emergency contacts.php">Emergencies</a>
+                        <a href="Map.JPG">Map</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- PROFILE -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                Profile
+            </button>
+
+            <div class="dropdown-menu small-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>My Profile</h3>
+                        <a href="register.html">Register</a>
+                        <a href="login.html">Sign in</a>
+                        <a href="trackfault.php">My Tickets</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+  
+<!-- HAMBURGER BUTTON -->
+<button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu"> ☰</button>
+
+</nav>
+</header>
+
+<!-- Header -->
+<header>
+    <section class="login_section">
+
+        <div class="login"> 
+            <h2>Welcome to Makhanda Connect</h2> 
+            <p> Please enter your details to access your account. </p>
+            <div id="login-error" role="alert" hidden></div>
+
+        <form action="login_testing.php" method="POST">
+            <table class="login-table">
+                <tr>
+                    <td>USERNAME:</td>
+                    <td><input type="text" name="username" maxlength="50" required></td>
+                </tr>
+                <tr>
+                    <td>PASSWORD:</td>
+                    <td><input type="password" name="pword" maxlength="50" required></td>
+                </tr>
+                <tr> 
+                    <td><button type="submit" class="login-button">Login</button></td>
+                    <td><button type="reset" class="reset-button">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+
+        <div class="login-links"> 
+            <a href="forgotpassword.html">Forgot your password?</a> 
+            <br> <span>Don't have an account?</span> 
+            <a href="Register.html">Register</a> 
+        </div>
+    </div>
+    </section>
+
+    <script>
+        const errorMessage = new URLSearchParams(window.location.search).get('error');
+        const errorElement = document.getElementById('login-error');
+
+        if (errorMessage && errorElement) {
+            errorElement.textContent = errorMessage;
+            errorElement.hidden = false;
+            errorElement.style.color = '#8b1e3f';
+            errorElement.style.backgroundColor = '#fbe9ee';
+            errorElement.style.border = '1px solid #e0a8b8';
+            errorElement.style.padding = '10px';
+            errorElement.style.marginBottom = '15px';
+        }
+    </script>
+
+<!--Footer-->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-sec">
+            <h3>CONTACT US</h3>
+            <p>Tel: <a href="">046 603 6731</a></p>
+            <p>Email: <a href="">info@makanamunicipality.gov.za</a></p>
+            <p>Postal Address: 1921 High Street, Makhanda, 6139</p>
+            <p>WhatsApp Channel: <a href="">Join Channel</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/OfficialMakanaMunicipality/">Makana_Municipality</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>ABOUT US</h3>
+            <p><a href="">Historical background</a></p>
+            <p><a href="">vision and Mission</a></p>
+            <p><a href="">Councilors</a></p>
+        </div>  
+
+        <div class="footer-sec">
+            <h3>Quick Links</h3>
+            <p><a href="">Vision and Mission</a></p>
+            <p><a href="">Track Fault</a></p>
+            <p><a href="">View Updates</a></p>
+            <p><a href="">Ward Reports</a></p>
+        </div>
+
+        <div class="footer-sec">
+            <h3>Physical Address</h3>
+            <a href="https://www.bing.com/maps/search?name=Makana+Local+Municipality+Makhanda&trfc=&mepi=0%7E%7EEmbedded%7ELargeMapLink&FORM=MPSRPL&style=r&q=Makana+Local+Municipality+Makhanda&ss=id.ypid%3AYN47AB9989AA88C9DA&ppois=-33.30935287475586_26.52762222290039_Makana+Local+Municipality+Makhanda&cp=-33.309353%7E26.527622&lvl=15">
+            <img src="google maps logo.jpg">
+            </a>
+        </div>  
+
+
+</footer>
+
+    <section class="bottom-footer">
+        <p>Brought to you by Makana Municipality in collaboration with MyMakhanda Tech.<br>
+        Makana Municipality Copyright @ 2026, All Rights Reserved.</p>
+    </section>
+
+    <!--JavaScript for the password-->
+    <script> 
+        function showPassword() { 
+            const password = document.getElementById("pword"); 
+            if (password.type === "password") { 
+                password.type = "text"; 
+            } else { 
+                password.type = "password"; } } 
+
+        /* Dropdown Logic */
+(function () {
+
+    const dropdowns = document.querySelectorAll(".nav-dropdown");
+    const body = document.body;
+
+
+    function closeAll(except) {
+        dropdowns.forEach(function (dropdown) {
+            if (dropdown !== except) {
+                dropdown.classList.remove("is-open");
+                const button = dropdown.querySelector(".dropdown-link");
+
+                if (button) {
+                    button.setAttribute("aria-expanded", "false");
+                }
+            }
+        });
+
+        if (!document.querySelector(".nav-dropdown.is-open") && !document.querySelector(".nav-dropdown:hover")) {
+            body.classList.remove("menu-open");
+        }
+    }
+
+
+    dropdowns.forEach(function (dropdown) {
+        const trigger = dropdown.querySelector(".dropdown-link");
+
+        if (!trigger) {
+            return;
+        }
+
+
+        /* Click dropdown */
+        trigger.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const isOpen =  dropdown.classList.contains("is-open");
+            closeAll(dropdown);
+            dropdown.classList.toggle( "is-open", !isOpen );
+            trigger.setAttribute(  "aria-expanded", String(!isOpen) );
+            body.classList.toggle("menu-open",!isOpen);
+        });
+
+        /* Hover */
+        dropdown.addEventListener(
+            "mouseenter",
+            function () {
+                body.classList.add("menu-open");
+            }
+        );
+
+        dropdown.addEventListener(
+            "mouseleave",
+            function () {
+                setTimeout(function () {
+                    if (
+                        !document.querySelector(
+                            ".nav-dropdown:hover"
+                        ) &&
+                        !document.querySelector(
+                            ".nav-dropdown.is-open"
+                        )
+                    ) {
+                        body.classList.remove(
+                            "menu-open"
+                        );
+                    }
+                }, 60);
+            }
+        );
+    });
+
+    /* Click outside dropdown */
+    document.addEventListener("click",
+        function (event) {
+            if (!event.target.closest(".nav-dropdown")) {
+                closeAll();
+            }
+        }
+    );
+
+    /* Escape key */
+    document.addEventListener( "keydown",
+        function (event) {
+            if (event.key === "Escape") {
+                closeAll();
+                const mainNav = document.getElementById( "mainNav");
+
+                if (mainNav) {
+                    mainNav.classList.remove( "is-open" );
+                }
+            }
+        }
+    );
+
+    /* Mobile Menu */
+    const toggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+    if (toggle && mainNav) {
+        toggle.addEventListener( "click",
+            function (event) {
+                event.stopPropagation();
+
+                const open = mainNav.classList.toggle( "is-open");
+                toggle.setAttribute(  "aria-expanded", String(open));
+            }
+        );
+    }
+
+    /* Close mobile menu */
+    document.addEventListener("click",
+        function (event) {
+            if (!event.target.closest( ".floating-nav")) {
+                if (mainNav) { 
+                    mainNav.classList.remove("is-open");
+                }
+                if (toggle) {
+                    toggle.setAttribute( "aria-expanded", "false");
+                }
+            }
+        }
+    );
+})();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Makana · Built for the Future</title>
+
+    <!-- ============================================================
+    COMPLETE STYLESHEET – Apple‑level fit & finish
+    ============================================================ -->
+    <style>
+        /* ---------- reset & base ---------- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0d0d0f;
+            --color-surface: #1a1a1e;
+            --color-card: #242428;
+            --color-text-primary: #f5f5f7;
+            --color-text-secondary: #86868b;
+            --color-accent: #f5a623;
+            --color-accent-dim: rgba(245, 166, 35, 0.15);
+            --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--color-accent);
+            color: #0d0d0f;
+        }
+
+        /* ---------- utility ---------- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            border: 1px solid rgba(245, 166, 35, 0.25);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ---------- scroll indicator (pulse) ---------- */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-text-secondary);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            animation: pulse-soft 2.4s ease-in-out infinite;
+            cursor: default;
+            z-index: 2;
+        }
+
+        .scroll-hint .mouse {
+            width: 24px;
+            height: 36px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            position: relative;
+        }
+
+        .scroll-hint .mouse::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 40px;
+            animation: scroll-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-dot {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(12px);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes pulse-soft {
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ---------- header (smart nav) ---------- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0.8rem 0;
+            background: rgba(13, 13, 15, 0.75);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: padding 0.4s var(--ease-smooth), background 0.4s ease;
+        }
+
+        .site-header.scrolled {
+            padding: 0.3rem 0;
+            background: rgba(13, 13, 15, 0.92);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo span small {
+            font-weight: 300;
+            color: var(--color-text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* desktop nav */
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        .nav-desktop a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s var(--ease-smooth);
+        }
+
+        .nav-desktop a:hover {
+            color: var(--color-text-primary);
+        }
+
+        .nav-desktop a:hover::after {
+            width: 100%;
+        }
+
+        .nav-desktop a.active {
+            color: var(--color-text-primary);
+        }
+
+        .nav-desktop a.active::after {
+            width: 100%;
+        }
+
+        /* auth buttons */
+        .auth-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .auth-actions a {
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .auth-actions .login {
+            color: var(--color-text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .auth-actions .login:hover {
+            color: var(--color-text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-actions .register {
+            background: var(--color-accent);
+            color: #0d0d0f;
+        }
+
+        .auth-actions .register:hover {
+            background: #f0b840;
+            transform: scale(1.03);
+        }
+
+        /* mobile toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.4rem;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-text-primary);
+            border-radius: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* mobile overlay */
+        .nav-mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 13, 15, 0.96);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            z-index: 999;
+            padding: 5rem 2rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .nav-mobile-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .nav-mobile-overlay a {
+            color: var(--color-text-primary);
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: color 0.2s;
+        }
+
+        .nav-mobile-overlay a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ---------- hero (cinematic) ---------- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 0 4rem;
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        /* simulated video background (gradient + pattern) */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 40%, rgba(245, 166, 35, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(245, 166, 35, 0.04) 0%, transparent 50%),
+                linear-gradient(180deg, #0d0d0f 0%, #1a1a1e 100%);
+            z-index: 0;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f5a623' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+            padding: 0 1.5rem;
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--color-accent);
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(245, 166, 35, 0.1);
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 0.6rem;
+            background: linear-gradient(180deg, #ffffff 20%, #a0a0a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subhead {
+            font-size: 1.6rem;
+            font-weight: 350;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-content .desc {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            max-width: 560px;
+            margin: 0 auto 2rem;
+            font-weight: 350;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 2.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s var(--ease-spring);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: #0d0d0f;
+            box-shadow: 0 8px 32px rgba(245, 166, 35, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 40px rgba(245, 166, 35, 0.35);
+            background: #f0b840;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.04);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ---------- stats (animated counters) ---------- */
+        .stats-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            background: var(--color-surface);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 3.4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 30%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            font-weight: 350;
+            margin-top: 0.2rem;
+        }
+
+        /* ---------- feature grid (cards with depth) ---------- */
+        .features {
+            padding: 5rem 0;
+            background: var(--color-bg);
+        }
+
+        .features .section-head {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .features .section-head h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.4rem;
+        }
+
+        .features .section-head p {
+            color: var(--color-text-secondary);
+            font-weight: 350;
+            font-size: 1.1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--color-card);
+            border-radius: 28px;
+            padding: 2.2rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.45s var(--ease-spring);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            background: radial-gradient(circle at 30% 20%, rgba(245, 166, 35, 0.04), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 166, 35, 0.12);
+            box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card .icon {
+            font-size: 2.6rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-card p {
+            color: var(--color-text-secondary);
+            font-weight: 350;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .feature-card .link {
+            display: inline-block;
+            margin-top: 1.2rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .feature-card .link:hover {
+            color: #f0b840;
+        }
+
+        /* ---------- notice board (premium) ---------- */
+        .notices {
+            padding: 5rem 0;
+            background: var(--color-surface);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .notices .section-head {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .notices .section-head h2 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        .notices .section-head p {
+            color: var(--color-text-secondary);
+            font-weight: 350;
+        }
+
+        .notice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .notice-card {
+            background: var(--color-card);
+            border-radius: 24px;
+            padding: 1.8rem 1.8rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s var(--ease-spring);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notice-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(245, 166, 35, 0.1);
+            box-shadow: 0 16px 48px -16px rgba(0, 0, 0, 0.5);
+        }
+
+        .notice-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .notice-meta .day {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .notice-meta .month {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .notice-tag {
+            align-self: flex-start;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+            background: rgba(245, 166, 35, 0.1);
+            color: var(--color-accent);
+            border: 1px solid rgba(245, 166, 35, 0.06);
+            margin-bottom: 0.4rem;
+        }
+
+        .notice-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .notice-card p {
+            color: var(--color-text-secondary);
+            font-weight: 350;
+            font-size: 0.95rem;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .notice-card a {
+            margin-top: 1rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .notice-card a:hover {
+            color: #f0b840;
+        }
+
+        .notices-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .notices-cta .btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--color-text-primary);
+        }
+
+        .notices-cta .btn:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.16);
+        }
+
+        /* ---------- footer (apple style) ---------- */
+        .footer {
+            background: var(--color-bg);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--color-text-primary);
+        }
+
+        .footer-col img {
+            max-width: 100px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 0.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-col img:hover {
+            transform: scale(1.02);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 1.8rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+        }
+
+        .footer-bottom a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        /* ---------- responsive ---------- */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 820px) {
+            .hero-content h1 {
+                font-size: 3.4rem;
+            }
+            .hero-content .subhead {
+                font-size: 1.3rem;
+            }
+            .nav-desktop {
+                display: none;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            .auth-actions {
+                display: none;
+            }
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+            .hero-content .subhead {
+                font-size: 1.1rem;
+            }
+            .hero-content .desc {
+                font-size: 0.95rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .stat-number {
+                font-size: 2.4rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .notice-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .btn {
+                padding: 0.7rem 1.6rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ---------- scroll-triggered animation (intersection observer ready) ---------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-spring);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    HEADER – smart sticky
+    ============================================================ -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <!-- inline SVG logo – replace with your own if needed -->
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23f5a623' stroke-width='2'/%3E%3Cpath d='M10 12 L14 20 L22 10' stroke='%23f5a623' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" alt="Makana" />
+                <span>Makana <small>· Makhanda</small></span>
+            </a>
+
+            <!-- desktop nav -->
+            <ul class="nav-desktop">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <!-- auth -->
+            <div class="auth-actions">
+                <a href="#" class="login">Log In</a>
+                <a href="#" class="register">Register</a>
+            </div>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- mobile overlay -->
+    <div class="nav-mobile-overlay" id="mobileOverlay">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Reports</a>
+        <a href="#">Contact</a>
+        <a href="#" style="font-size:1.2rem; color:var(--color-accent);">Log In / Register</a>
+    </div>
+
+    <!-- ============================================================
+    HERO – cinematic
+    ============================================================ -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <span class="badge">🇿🇦 Eastern Cape · Sarah Baartman District</span>
+            <h1>Makhanda<br />for the Future</h1>
+            <p class="subhead">Your community. Your voice. Your municipality.</p>
+            <p class="desc">
+                Transparent governance, sustainable development, and a vibrant
+                heritage — connecting 14 wards with world-class service.
+            </p>
+            <div class="hero-actions">
+                <a href="#" class="btn btn-primary">
+                    Report an Issue
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </a>
+                <a href="#" class="btn btn-secondary">Track My Report</a>
+            </div>
+        </div>
+
+        <!-- scroll hint -->
+        <div class="scroll-hint">
+            <span class="mouse"></span>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    STATISTICS
+    ============================================================ -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-item reveal reveal-delay-1">
+                <div class="stat-number" data-target="125">125+</div>
+                <p class="stat-label">Issues Reported</p>
+            </div>
+            <div class="stat-item reveal reveal-delay-2">
+                <div class="stat-number" data-target="85">85</div>
+                <p class="stat-label">Issues Resolved</p>
+            </div>
+            <div class="stat-item reveal reveal-delay-3">
+                <div class="stat-number" data-target="14">14</div>
+                <p class="stat-label">Wards Connected</p>
+            </div>
+            <div class="stat-item reveal reveal-delay-4">
+                <div class="stat-number" data-target="90">90%</div>
+                <p class="stat-label">Resolution Rate</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FEATURES
+    ============================================================ -->
+    <section class="features">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag">Services</span>
+                <h2>Built for every citizen</h2>
+                <p>From reporting faults to tracking progress — we keep you informed.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card reveal reveal-delay-1">
+                    <span class="icon">📍</span>
+                    <h3>Strategic Location</h3>
+                    <p>120 km west of Gqeberha, 180 km east of KuGompo City. Coastal access with major airports and ports.</p>
+                    <a href="#" class="link">Learn more →</a>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <span class="icon">🎭</span>
+                    <h3>Arts &amp; Heritage</h3>
+                    <p>Home to the National Arts Festival, Rhodes University, and leading schools — culture thrives here.</p>
+                    <a href="#" class="link">Discover →</a>
+                </div>
+                <div class="feature-card reveal reveal-delay-3">
+                    <span class="icon">🌿</span>
+                    <h3>Sustainable Development</h3>
+                    <p>Commitment to accountable governance, transparent processes, and a greener future for all.</p>
+                    <a href="#" class="link">Our vision →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    NOTICE BOARD
+    ============================================================ -->
+    <section class="notices">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-tag">Announcements</span>
+                <h2>Notice Board</h2>
+                <p>Stay informed about important municipal updates and community news.</p>
+            </div>
+
+            <div class="notice-grid">
+                <div class="notice-card reveal reveal-delay-1">
+                    <div class="notice-meta">
+                        <span class="day">26</span>
+                        <span class="month">AUG</span>
+                    </div>
+                    <span class="notice-tag">Important</span>
+                    <h3>Planned Water Interruption</h3>
+                    <p>Residents are advised of a planned water interruption affecting selected areas of Makhanda.</p>
+                    <a href="#">Read More →</a>
+                </div>
+                <div class="notice-card reveal reveal-delay-2">
+                    <div class="notice-meta">
+                        <span class="day">28</span>
+                        <span class="month">AUG</span>
+                    </div>
+                    <span class="notice-tag">Community</span>
+                    <h3>Community Meeting</h3>
+                    <p>Join us to discuss local service delivery matters and share your voice.</p>
+                    <a href="#">Read More →</a>
+                </div>
+                <div class="notice-card reveal reveal-delay-3">
+                    <div class="notice-meta">
+                        <span class="day">30</span>
+                        <span class="month">AUG</span>
+                    </div>
+                    <span class="notice-tag">Service</span>
+                    <h3>Road Maintenance Update</h3>
+                    <p>Road works will take place in selected areas. Please use alternative routes.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+
+            <div class="notices-cta reveal">
+                <a href="#" class="btn">View All Notices</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p><a href="tel:0466036731">046 603 6731</a></p>
+                <p><a href="mailto:info@makanamunicipality.gov.za">info@makanamunicipality.gov.za</a></p>
+                <p>1921 High Street, Makhanda, 6139</p>
+                <p><a href="#">WhatsApp Channel</a> · <a href="#">Facebook</a></p>
+            </div>
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="#">Historical background</a>
+                <a href="#">Vision &amp; Mission</a>
+                <a href="#">Councilors</a>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">Track Fault</a>
+                <a href="#">View Updates</a>
+                <a href="#">Ward Reports</a>
+            </div>
+            <div class="footer-col">
+                <h4>Location</h4>
+                <a href="#" target="_blank">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80' viewBox='0 0 120 80'%3E%3Crect width='120' height='80' fill='%23242428'/%3E%3Ccircle cx='60' cy='40' r='20' fill='%23f5a623' opacity='0.2'/%3E%3Ccircle cx='60' cy='40' r='8' fill='%23f5a623'/%3E%3C/svg%3E" alt="Map" />
+                </a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>
+                Brought to you by Makana Municipality in collaboration with MyMakhanda Tech.<br />
+                Makana Municipality Copyright &copy; 2026, All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT – interactions, scroll effects, counter animation
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- mobile nav toggle ----------
+            const toggle = document.getElementById('navToggle');
+            const overlay = document.getElementById('mobileOverlay');
+
+            if (toggle && overlay) {
+                toggle.addEventListener('click', function() {
+                    const isOpen = toggle.classList.toggle('open');
+                    overlay.classList.toggle('open');
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                });
+
+                // close overlay on link click
+                overlay.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        toggle.classList.remove('open');
+                        overlay.classList.remove('open');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+
+            // ---------- smart header shrink on scroll ----------
+            const header = document.getElementById('siteHeader');
+            let lastScroll = 0;
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > 80) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                lastScroll = currentScroll;
+            });
+
+            // ---------- reveal on scroll (Intersection Observer) ----------
+            const revealElements = document.querySelectorAll('.reveal');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -40px 0px'
+                });
+
+                revealElements.forEach(function(el) {
+                    observer.observe(el);
+                });
+            } else {
+                // fallback: show all
+                revealElements.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }
+
+            // ---------- animated counter (simple version) ----------
+            // we just add a visual effect: numbers will count up if they have data-target
+            // but we keep it simple for now – just a subtle pulse on reveal
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(function(el) {
+                const target = el.getAttribute('data-target');
+                if (target) {
+                    // store original text
+                    const originalText = el.textContent.trim();
+                    // we could animate, but keep it as-is for demo
+                    // but we add a small class to trigger a gentle pop
+                    el.style.transition = 'transform 0.6s var(--ease-spring)';
+                    el.style.transform = 'scale(1)';
+                    // on reveal, we could scale up, but we rely on the parent .reveal
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,871 @@
+/* =========================================================
+   GENERAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f6efe6;
+
+    color: #222;
+
+    min-height: 100vh;
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.manager-header {
+
+    background-color: #ffffff;
+
+    min-height: 100px;
+
+    padding: 15px 6%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+
+.header-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+
+.municipality-logo {
+
+    width: 150px;
+
+    height: auto;
+
+}
+
+
+.header-left h1 {
+
+    color: #4b1f2a;
+
+    font-size: 25px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.header-left p {
+
+    color: #666;
+
+    font-size: 14px;
+
+}
+
+
+.header-right {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.header-right a {
+
+    text-decoration: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+}
+
+
+.home-button {
+
+    background-color: #40e0d0;
+
+    color: #222;
+
+}
+
+
+.logout-button {
+
+    background-color: #4b1f2a;
+
+    color: white;
+
+}
+
+
+.header-right a:hover {
+
+    transform: translateY(-2px);
+
+    opacity: 0.9;
+
+}
+
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.manager-container {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+}
+
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.page-heading {
+
+    margin-bottom: 30px;
+
+}
+
+
+.page-heading h2 {
+
+    color: #4b1f2a;
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.page-heading p {
+
+    color: #666;
+
+}
+
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.statistics {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.stat-card {
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+}
+
+
+.stat-number {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    color: #4b1f2a;
+
+    margin-bottom: 5px;
+
+}
+
+
+.active-stat .stat-number {
+
+    color: #168b80;
+
+}
+
+
+.stat-label {
+
+    color: #666;
+
+    font-size: 14px;
+
+}
+
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.notice-form-section,
+.existing-notices {
+
+    background-color: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+}
+
+
+.section-title {
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-title h2 {
+
+    color: #4b1f2a;
+
+    font-size: 22px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.section-title p {
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.notice-form {
+
+    width: 100%;
+
+}
+
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    color: #4b1f2a;
+
+}
+
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d5d5d5;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    background-color: #fff;
+
+    outline: none;
+
+    transition: 0.2s;
+
+}
+
+
+.form-group textarea {
+
+    resize: vertical;
+
+    min-height: 130px;
+
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+
+    border-color: #40e0d0;
+
+    box-shadow: 0 0 0 3px rgba(64, 224, 208, 0.15);
+
+}
+
+
+
+/* =========================================================
+   FORM ROW
+========================================================= */
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+
+/* =========================================================
+   FORM BUTTONS
+========================================================= */
+
+.form-buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 10px;
+
+}
+
+
+.save-button {
+
+    border: none;
+
+    background-color: #4b1f2a;
+
+    color: white;
+
+    padding: 13px 25px;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.save-button:hover {
+
+    background-color: #35151e;
+
+    transform: translateY(-1px);
+
+}
+
+
+.cancel-button {
+
+    text-decoration: none;
+
+    background-color: #eeeeee;
+
+    color: #333;
+
+    padding: 13px 25px;
+
+    border-radius: 9px;
+
+}
+
+
+.cancel-button:hover {
+
+    background-color: #ddd;
+
+}
+
+
+
+/* =========================================================
+   NOTICE LIST
+========================================================= */
+
+.notice-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+
+.notice-card {
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    background-color: #fff;
+
+    transition: 0.2s;
+
+}
+
+
+.notice-card:hover {
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+
+}
+
+
+
+/* =========================================================
+   NOTICE TOP
+========================================================= */
+
+.notice-card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+}
+
+
+.notice-card h3 {
+
+    color: #4b1f2a;
+
+    font-size: 19px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.notice-date {
+
+    color: #777;
+
+    font-size: 13px;
+
+}
+
+
+
+/* =========================================================
+   NOTICE MESSAGE
+========================================================= */
+
+.notice-message {
+
+    margin: 18px 0;
+
+    line-height: 1.6;
+
+    color: #444;
+
+}
+
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge,
+.priority-badge {
+
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+.status-badge.active {
+
+    background-color: #d9f5f1;
+
+    color: #14786e;
+
+}
+
+
+.status-badge.inactive {
+
+    background-color: #eeeeee;
+
+    color: #777;
+
+}
+
+
+
+/* =========================================================
+   PRIORITY
+========================================================= */
+
+.priority-badge.normal {
+
+    background-color: #eeeeee;
+
+    color: #555;
+
+}
+
+
+.priority-badge.important {
+
+    background-color: #fff1c7;
+
+    color: #856404;
+
+}
+
+
+.priority-badge.urgent {
+
+    background-color: #f8d7da;
+
+    color: #842029;
+
+}
+
+
+
+/* =========================================================
+   NOTICE FOOTER
+========================================================= */
+
+.notice-card-footer {
+
+    border-top: 1px solid #eee;
+
+    padding-top: 15px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.notice-actions {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+
+.notice-actions a {
+
+    text-decoration: none;
+
+    padding: 8px 15px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+}
+
+
+.edit-button {
+
+    background-color: #40e0d0;
+
+    color: #222;
+
+}
+
+
+.delete-button {
+
+    background-color: #4b1f2a;
+
+    color: white;
+
+}
+
+
+.notice-actions a:hover {
+
+    opacity: 0.8;
+
+}
+
+
+
+/* =========================================================
+   NO NOTICES
+========================================================= */
+
+.no-notices {
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    background-color: #fafafa;
+
+    border-radius: 12px;
+
+}
+
+
+.no-notices h3 {
+
+    color: #4b1f2a;
+
+    margin-bottom: 8px;
+
+}
+
+
+.no-notices p {
+
+    color: #777;
+
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.manager-footer {
+
+    background-color: #4b1f2a;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 25px 20px;
+
+    margin-top: 50px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+
+    .manager-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    .header-right {
+
+        width: 100%;
+
+    }
+
+
+    .header-right a {
+
+        flex: 1;
+
+        text-align: center;
+
+    }
+
+
+    .statistics {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .notice-card-top {
+
+        flex-direction: column;
+
+    }
+
+
+    .notice-card-footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+
+}
+
+
+@media (max-width: 500px) {
+
+
+    .manager-container {
+
+        width: 94%;
+
+        margin: 25px auto;
+
+    }
+
+
+    .notice-form-section,
+    .existing-notices {
+
+        padding: 20px;
+
+    }
+
+
+    .municipality-logo {
+
+        width: 120px;
+
+    }
+
+
+    .header-left h1 {
+
+        font-size: 20px;
+
+    }
+
+
+    .page-heading h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .form-buttons {
+
+        flex-direction: column;
+
+    }
+
+
+    .save-button,
+    .cancel-button {
+
+        width: 100%;
+
+        text-align: center;
+
+    }
+
+}

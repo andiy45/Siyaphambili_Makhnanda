@@ -1,0 +1,75 @@
+/* ============================================ */
+/* CALENDAR — standalone stylesheet             */
+/* ============================================ */
+
+.dates .day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    cursor: default;
+    border-radius: 6px;
+    transition: background 0.15s;
+}
+
+/* Today's date */
+.dates .day.today {
+    outline: 2px solid #b08d57;
+    font-weight: bold;
+}
+
+/* Days that have an event */
+.dates .day.has-event {
+    background: #4b1f2a;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: help;
+}
+
+/* Small gold dot inside event days */
+.dates .day.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background: #b08d57;
+    border-radius: 50%;
+}
+
+/* Prev / next month arrows */
+.calendar-header .cal-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1ece4;
+    color: #4b1f2a;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.calendar-header .cal-nav:hover {
+    background: #4b1f2a;
+    color: #ffffff;
+}
+
+/* Optional: upcoming events list */
+.upcoming-events { margin-top: 20px; }
+.upcoming-events h3 { font-size: 1rem; color: #4b1f2a; margin-bottom: 10px; }
+.upcoming-events ul { list-style: none; padding: 0; margin: 0; }
+.upcoming-events li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e6ddd2;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+}
+.upcoming-events li:last-child { border-bottom: none; }

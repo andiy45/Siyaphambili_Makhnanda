@@ -1,0 +1,13 @@
+22:16:14 | logAttempt called | user=MariaK | comment=Successful login attempt | reason=Valid login details
+22:21:04 | logAttempt called | user=loni95 | comment=Failed login attempt | reason=Used wrong password
+  INSERT OK | affected=-1 | insert_id=0
+22:21:11 | logAttempt called | user=loni95 | comment=Failed login attempt | reason=Used wrong password
+  INSERT OK | affected=-1 | insert_id=0
+22:22:17 | logAttempt called | user=nare | comment=Successful login attempt | reason=Valid login details
+  INSERT OK | affected=-1 | insert_id=0
+22:22:49 | logAttempt called | user=web | comment=Failed login attempt | reason=Account awaiting administrator validation
+  INSERT OK | affected=-1 | insert_id=0
+22:23:15 | logAttempt called | user=testmode45 | comment=Successful login attempt | reason=Valid login details
+  INSERT OK | affected=-1 | insert_id=0
+22:23:34 | logAttempt called | user=web | comment=Successful login attempt | reason=Valid login details
+  INSERT OK | affected=-1 | insert_id=0

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Landing Page</title>
+    <link rel="stylesheet" href="home landing page.css">
+
+<style>
+    /*GLOBAL RESETS*/
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                     "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: #1d1d1f;
+        background: #f5f5f7;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                     "Helvetica Neue", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: #1d1d1f;
+        background: #f5f5f7;
+    }
+
+    .floating-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: 65px;
+        background: white;
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.99);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 25px;
+        z-index: 9999;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .brand:hover { 
+      transition: opacity 0.2s ease;
+    }
+    .brand-mark {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        display: block;
+        transition: transform 0.25s ease;
+    }
+
+    .brand:hover .brand-mark {
+        transform: rotate(-6deg) scale(1.05);
+    }
+
+    .brand-text {
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+    .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .main-nav > li {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .main-nav > li > a,
+    .main-nav > li > .dropdown-link {
+        text-decoration: none;
+        color: #4b1f2a;
+        font-size: 15px;
+        font-weight: 500;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+        transition: opacity 0.2s ease;
+    }
+
+    .main-nav > li > a:hover,
+    .main-nav > li > .dropdown-link:hover {
+        opacity: 0.65;
+    }
+
+    .nav-dropdown {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: 65px;                     
+        left: 0;
+        right: 0;
+        width: 100vw;
+        background: white;
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 30px 0;
+        display: inline-flex;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0s linear 0.25s;
+        z-index: 9999;
+    }
+
+    /* Invisible hover bridge - fills the gap between the nav bar
+       bottom (at 80px) and the top of the menu, so moving the mouse
+       down doesn't close the menu. */
+    .dropdown-menu::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: 0;
+        right: 0;
+        height: 20px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown.is-open .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0s linear 0s;
+    }
+
+    nav ul li a:hover, .authentication a:hover {
+    color: #661501;
+    
+    }
+
+    .dropdown-inner {
+        width: 92%;
+        max-width: 1200px;
+        padding: 0 25px;
+        display: flex;
+        gap: 60px;
+    }
+
+    .dropdown-menu.small-menu .dropdown-inner {
+        justify-content: flex;
+    }
+
+    /*DROPDOWN COLUMNS*/
+    .dropdown-column {
+        display: flex;
+        flex-direction: column;
+        min-width: 180px;
+    }
+
+    .dropdown-column h3 {
+        font-size: 12px;
+        font-weight: 600;
+        color: #4b1f2a;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 12px;
+    }
+
+    .dropdown-column a {
+        text-decoration: none;
+        color: #555;
+        font-size: 14px;
+        padding: 7px 0;
+        transition: color 0.2s, padding-left 0.2s;
+    }
+
+    .dropdown-column a:hover {
+        color: #661501;
+        padding-left: 10px;
+        border-radius: 15px;
+
+    }
+
+    /* PAGE DIM OVERLAY */
+    .page-content {
+    transition: filter 0.35s ease, transform 0.35s ease;
+    transform-origin: top center;
+    will-change: filter;
+    }
+
+   /* Applied when a menu is open */
+    body.menu-open .page-content {
+    filter: blur(8px);
+    transform: scale(0.98);
+    pointer-events: none;   /* prevents clicking blurred content */
+    user-select: none;      /* prevents selecting blurred content */
+    }
+    .page-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+        z-index: 9997;
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+    }
+
+    body.menu-open .page-overlay {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 0.25s ease, visibility 0s linear 0s;
+    }
+
+    /*SEARCH BUTTON*/
+    .search-button {
+        background: transparent;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s ease;
+    }
+
+    .search-button:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .search-icon {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+
+    /*MOBILE*/
+    .menu-toggle { display : none; }
+    @media (max-width: 860px) {
+      .menu-toggle { display: inline-flex; }
+        .floating-nav { padding: 0 16px; }
+
+        /* Hide the desktop row */
+        .main-nav { display: none; }
+
+        /* NEW: the mobile panel — a full-width sheet directly
+          under the floating bar */
+        .main-nav.is-open {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: fixed;                 
+            top: 65px;                       
+            left: 0;                        
+            right: 0;
+            width: percent(100vw);                 
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;                
+            background: rgba(255, 255, 255, 0.97);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            padding: 12px 20px;
+            gap: 0;
+            height: auto;
+            z-index: 9999;                   
+        }
+
+        .main-nav > li {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .main-nav > li > a,
+        .main-nav > li > .dropdown-link {
+            display: block;
+            padding: 12px 0;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            height: auto;
+            color: #4b1f2a;
+        }
+
+        /* Kill the full-width mega menu on mobile */
+        .dropdown-menu,
+        .dropdown-menu.small-menu {
+            position: static;
+            width: 100%;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            box-shadow: none;
+            backdrop-filter: none;
+            border-bottom: none;
+            padding: 0;
+            background: transparent;
+            display: none;
+        }
+
+        .dropdown-menu::before { display: none; }
+
+        .nav-dropdown.is-open .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-inner {
+            width: 100%;
+            padding: 0 0 12px 12px;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .dropdown-column h3 { margin-top: 10px; }
+
+        /* NEW: show hamburger, hide its rotation when closed */
+        .menu-toggle { display: inline-flex; }
+
+        .page-overlay { display: none; }
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+/* SLIDESHOW */
+
+.slideshow {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Individual slides */
+
+.slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide.active {
+    display: block;
+}
+
+/* Images */
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dark overlay */
+
+.slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Text */
+
+.slide-text {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: white;
+    max-width: 600px;
+}
+
+.slide-text h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.slide-text p {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+/* Button */
+
+.slide-button {
+    display: inline-block;
+    background-color: #40E0D0;
+    color: #4B1F2A;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.slide-button:hover {
+    background-color: #b08d57;
+    color: white;
+}
+
+/* Arrows */
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    font-size: 22px;
+}
+
+.prev {
+    left: 25px;
+}
+
+.next {
+    right: 25px;
+}
+
+.prev:hover,
+.next:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* Dots */
+
+.dots {
+    position: absolute;
+    z-index: 3;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+
+    margin: 0 5px;
+
+    background-color: white;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    opacity: 0.5;
+}
+
+.active-dot {
+    opacity: 1;
+}
+</style>
+</head>
+
+<body>
+<header>
+    <section class="slideshow">
+
+    <div class="slide active">
+        <img src="Church Square.png" alt="Makana Municipality">
+        <div class="slide-text">
+            <h1>Welcome to Makana Municipality</h1>
+            <p>Connecting our community with better municipal services.</p>
+            <a href="about.html" class="slide-button">Learn More</a>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="Makhanda View.jpg" alt="Makhanda">
+        <div class="slide-text">
+            <h1>Our Community</h1>
+            <p>Stay informed about developments and services in your ward.</p>
+            <a href="WardReports.php" class="slide-button">View Wards</a>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="makhanda.jpg" alt="Municipal Services">
+        <div class="slide-text">
+            <h1>Report a Fault</h1>
+            <p>Report water, electricity, roads and other municipal issues.</p>
+            <a href="ReportFault.php" class="slide-button">Report Now</a>
+        </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+
+    <!-- Dots -->
+    <div class="dots">
+        <span class="dot active-dot" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+    </div>
+
+</section>
+</header>
+
+
+<!-- Dim overlay — sits behind the nav, in front of page content -->
+<div class="page-overlay" id="pageOverlay"></div>
+
+<nav class="floating-nav" aria-label="Main">
+
+    <!-- LEFT: Brand -->
+    <a>
+    <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <!-- Circle background -->
+        <circle cx="20" cy="20" r="20" fill="#4b1f2a"/>
+        <!-- Stylised "M" -->
+        <path d="M10 28 L10 14 L15 22 L20 14 L25 22 L30 14 L30 28"
+              fill="none" stroke="#ffffff" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    
+    </a>
+
+    <!-- CENTER: Nav links -->
+    <ul class="main-nav" id="mainNav">
+
+        <li>
+            <a href="newhead.html">Home</a>
+        </li>
+
+        <!-- ABOUT -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                About
+            </button>
+
+            <div class="dropdown-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>About Makana</h3>
+                        <a href="about.html">Vision and Mission</a>
+                        <a href="history.html">History</a>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <h3>Governance</h3>
+                        <a href="council.php">Municipal Council</a>
+                        <a href="Councillors.html">Ward Councillors</a>
+                        <a href="departments.php">Municipal Departments</a>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <h3>Information</h3>
+                        <a href="notices.php">Municipal Notices</a>
+                        <a href="documents.php">Documents</a>
+                        <a href="updates.php">Municipal Updates</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- FAULT -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                Fault
+            </button>
+
+            <div class="dropdown-menu small-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>Report an Issue</h3>
+                        <a href="reportfault.html">Report Fault</a>
+                        <a href="trackfault.html">Track Fault</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- SUPPORT -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                Support
+            </button>
+
+            <div class="dropdown-menu small-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>Contacts &amp; Map</h3>
+                        <a href="ContactUs.html">Contact Us</a>
+                        <a href="contact_us.php">Emergencies</a>
+                        <a href="Map.JPG">Map</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- PROFILE -->
+        <li class="nav-dropdown">
+            <button type="button" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                Profile
+            </button>
+
+            <div class="dropdown-menu small-menu" role="menu">
+                <div class="dropdown-inner">
+                    <div class="dropdown-column">
+                        <h3>My Profile</h3>
+                        <a href="register.html">Register</a>
+                        <a href="login.html">Sign in</a>
+                        <a href="trackfault.html">My Tickets</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- RIGHT: Search + mobile toggle -->
+    <div style="display:flex; align-items:center; gap:8px;">
+        <button class="search-button" aria-label="Search">
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#5f6368"
+                 stroke-width="2.5"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="search-icon">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+            </svg>
+        </button>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<script>
+    /* DROPDOWN LOGIC */
+    (function () {
+        const dropdowns = document.querySelectorAll('.nav-dropdown');
+        const body = document.body;
+
+        function closeAll(except) {
+            dropdowns.forEach(d => {
+                if (d !== except) {
+                    d.classList.remove('is-open');
+                    const btn = d.querySelector('.dropdown-link');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+            if (!document.querySelector('.nav-dropdown.is-open') &&
+                !document.querySelector('.nav-dropdown:hover')) {
+                body.classList.remove('menu-open');
+            }
+        }
+
+        dropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector('.dropdown-link');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOpen = dropdown.classList.contains('is-open');
+                closeAll(dropdown);
+                dropdown.classList.toggle('is-open', !isOpen);
+                trigger.setAttribute('aria-expanded', String(!isOpen));
+                body.classList.toggle('menu-open', !isOpen);
+            });
+
+            // Hover in/out also drives the page dim
+            dropdown.addEventListener('mouseenter', () => {
+                body.classList.add('menu-open');
+            });
+            dropdown.addEventListener('mouseleave', () => {
+                setTimeout(() => {
+                    if (!document.querySelector('.nav-dropdown:hover') &&
+                        !document.querySelector('.nav-dropdown.is-open')) {
+                        body.classList.remove('menu-open');
+                    }
+                }, 60);
+            });
+        });
+
+        // Click outside → close
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-dropdown')) {
+                closeAll();
+            }
+        });
+
+        // Escape → close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAll();
+                document.getElementById('mainNav')?.classList.remove('is-open');
+            }
+        });
+
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const toggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        toggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = mainNav.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', String(open));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.floating-nav')) {
+                mainNav?.classList.remove('is-open');
+                toggle?.setAttribute('aria-expanded', 'false');
+            }
+        });
+    })();
+
+
+
+    //header
+
+let slideIndex = 0;
+
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+
+    if (index >= slides.length) {
+        slideIndex = 0;
+    }
+
+    if (index < 0) {
+        slideIndex = slides.length - 1;
+    }
+
+    slides.forEach(slide => {
+        slide.classList.remove("active");
+    });
+
+    dots.forEach(dot => {
+        dot.classList.remove("active-dot");
+    });
+
+    slides[slideIndex].classList.add("active");
+    dots[slideIndex].classList.add("active-dot");
+}
+
+function changeSlide(direction) {
+    slideIndex += direction;
+    showSlide(slideIndex);
+}
+
+function currentSlide(index) {
+    slideIndex = index;
+    showSlide(slideIndex);
+}
+
+/* Automatically change slide every 5 seconds */
+
+setInterval(() => {
+    slideIndex++;
+    showSlide(slideIndex);
+}, 5000);
+
+
+/* Search button  */ 
+function openSearch() { 
+    const searchBox = document.getElementById( "searchBox" ); 
+    searchBox.classList.toggle("show"); 
+
+    if ( searchBox.classList.contains("show") ) { 
+        document .getElementById("searchInput") .focus(); 
+    } 
+} 
+
+function searchWebsite() { 
+    const input = document.getElementById( "searchInput" ); 
+    const searchTerm = input.value .toLowerCase() 
+    .trim(); if (searchTerm === "") { 
+        alert( "Please enter something to search." ); 
+        input.focus(); return; 
+    } 
+    
+    /* Website pages */ 
+    const pages = [ { 
+        name: "About Municipality", url: "about.html", 
+        keywords: "about municipality makana history information vision mission" }, 
+        { name: "Report a Fault", 
+        url: "reportfault.html", 
+        keywords: "report fault water electricity roads sanitation issue problem" },
+        { name: "Track Fault", 
+        url: "trackfault.html", 
+        keywords: "track fault ticket status report" }, 
+        { name: "View Reports", 
+        url: "viewreports.php", 
+        keywords: "reports ward reports faults incidents" }, 
+        { name: "Ward Reports", 
+        url: "WardReports.php", 
+        keywords: "ward councillor wards community" }, 
+        { name: "Contact Us", 
+        url: "ContactUs.html", 
+        keywords: "contact phone email municipality address support" }, 
+        { name: "Municipal Notices", 
+        url: "notices.php", 
+        keywords: "notices announcements updates municipal" }, 
+        { name: "Municipal Council", 
+        url: "council.php", 
+        keywords: "council councillors governance" }, 
+        { name: "Municipal Departments", 
+        url: "departments.php", 
+        keywords: "departments services municipality" }, 
+        { name: "Home", 
+        url: "Home Landing Page.html", 
+        keywords: "home makana municipality welcome" } ];
+        
+        /* Find matching pages */ 
+        const results = pages.filter(function(page) {
+            return ( page.name .toLowerCase() .includes(searchTerm) || page.keywords .includes(searchTerm) ); }); 
+            
+            /* Open first matching result */ 
+        if (results.length > 0) { 
+            window.location.href = results[0].url; 
+        } else { 
+            alert( "No results found for: " + searchTerm ); } }
+
+</script>
+
+</section>
+
+<!-- Statistics Section -->
+<section class="statistics">
+
+    <div class="stat-card">
+        <h2>125+</h2>
+        <p>Issues Reported</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>85</h2>
+        <p>Issues Resolved</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>14</h2>
+        <p>Wards Connected</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>90%</h2>
+        <p>Resolution Rate</p>
+    </div>
+
+</section>
+
+<!--Row 1 Info-->
+<section class="info-row">
+
+    <!-- Calendar -->
+    <div class="info-card">
+
+        <h3>📅 Calendar</h3>
+
+        <h4>August 2026</h4>
+
+        <div class="days">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+        </div>
+
+        <div class="dates">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+            <span>11</span>
+            <span>12</span>
+            <span>13</span>
+            <span>14</span>
+            <span>15</span>
+            <span>16</span>
+
+            <span>17</span>
+            <span>18</span>
+            <span>19</span>
+            <span>20</span>
+            <span>21</span>
+            <span>22</span>
+            <span>23</span>
+            <span>24</span>
+            <span class="today">25</span>
+            <span>26</span>
+            <span>27</span>
+            <span>28</span>
+            <span>29</span>
+            <span>30</span>
+            <span>31</span>
+        </div>
+
+    </div>
+
+    <!-- Weather -->
+    <div class="info-card weather">
+
+        <h3>🌤️ Makhanda Weather</h3>
+
+        <div class="weather-icon">
+            🌤️
+        </div>
+
+        <div class="temperature">
+            18°C
+        </div>
+
+        <p>Hazy Sunshine</p>
+
+        <p>📍 Makhanda, Eastern Cape</p>
+
+    </div>
+
+    <!-- Dam Levels -->
+    <div class="info-card dam-level">
+
+        <h3>💧 Dam Levels</h3>
+
+        <h4>Settlers Dam</h4>
+
+        <div class="dam-percentage">
+            72%
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <p>Current Water Level</p>
+
+        <span class="status">
+            Stable
+        </span>
+
+    </div>
+
+</section>
+
+<!--  NOTICE BOARD -->
+<section class="notice-board">
+
+    <div class="notice-heading">
+
+        <h2>Notice Board</h2>
+        <p>
+            Stay informed about important municipal announcements,
+            service updates and community information.
+        </p>
+    </div>
+
+
+    <div class="notice-container">
+
+
+        <!-- Notice 1 -->
+        <div class="notice-ticket">
+
+            <div class="notice_date">
+
+                <span class="date-day">26</span>
+                <span class="date-month">AUG </span>
+
+            </div>
+
+
+            <div class="notice_content">
+
+                <span class="notice_category">IMPORTANT NOTICE</span>
+
+                <h3> Planned Water Interruption</h3>
+
+                <p>
+                    Residents are advised that there will be a
+                    planned water interruption affecting selected
+                    areas of Makhanda.
+                </p>
+
+                <a href="#">Read More →</a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Notice 2 -->
+        <div class="notice-ticket">
+
+            <div class="notice_date">
+                <span class="date-day">28</span>
+                <span class="date-month">AUG</span>
+            </div>
+
+
+            <div class="notice_content">
+
+                <span class="notice_category">COMMUNITY</span>
+
+                <h3>Community Meeting</h3>
+
+                <p>
+                    Residents are invited to attend the upcoming
+                    community meeting to discuss local service
+                    delivery matters.
+                </p>
+
+                <a href="#">
+                    Read More →
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Notice 3 -->
+        <div class="notice-ticket">
+
+            <div class="notice_date">
+                <span class="date-day">30</span>
+                <span class="date-month"> AUG</span>
+            </div>
+
+
+            <div class="notice_content">
+
+                <span class="notice_category">SERVICE UPDATE</span>
+
+                <h3>Road Maintenance Update</h3>
+
+                <p>
+                    Road maintenance work will take place in selected
+                    areas. Residents are encouraged to use alternative
+                    routes where possible.
+                </p>
+
+                <a href="#">Read More →</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- View All Notices -->
+    <div class="notice_button_cont">
+        <a href="#" class="view_notices">
+            View All Notices
+        </a>
+    </div>
+</section>
+
+</body>
+</html>

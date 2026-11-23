@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track My Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8ddd0;
+        }
+
+        .header h1 {
+            color: #4b1f2a;
+            font-size: 24px;
+        }
+
+        .header h1 i {
+            color: #b08d57;
+            margin-right: 10px;
+        }
+
+        .user-badge {
+            background: #4b1f2a;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+        }
+
+        .user-badge i {
+            margin-right: 8px;
+        }
+
+        .btn-refresh {
+            background: transparent;
+            border: 1px solid #4b1f2a;
+            color: #4b1f2a;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-refresh:hover {
+            background: #4b1f2a;
+            color: #fff;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background: #f6efe6;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid #e8ddd0;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .filter-bar label {
+            font-weight: 600;
+            color: #4b1f2a;
+            font-size: 14px;
+        }
+
+        .filter-bar select,
+        .filter-bar input {
+            padding: 6px 12px;
+            border: 1px solid #d4c8b8;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #ffffff;
+        }
+
+        .filter-bar input {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-count {
+            margin-left: auto;
+            color: #5a4a3a;
+            font-size: 14px;
+        }
+
+        /* Notice Cards */
+        .notice-board {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .notice-card {
+            background: #f6efe6;
+            border-radius: 12px;
+            padding: 20px 24px;
+            border-left: 6px solid #b08d57;
+            box-shadow: 0 2px 10px rgba(75, 31, 42, 0.08);
+        }
+
+        .notice-card:hover {
+            box-shadow: 0 4px 20px rgba(75, 31, 42, 0.12);
+        }
+
+        .notice-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .notice-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4b1f2a;
+        }
+
+        .notice-title i {
+            color: #b08d57;
+            margin-right: 8px;
+        }
+
+        .notice-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 3px 12px;
+            border-radius: 30px;
+            background: #ffffff;
+            color: #4b1f2a;
+        }
+
+        .tag i {
+            margin-right: 4px;
+            color: #b08d57;
+        }
+
+        .status-open {
+            background: #fce4e4;
+            color: #b23b3b;
+        }
+        .status-pending {
+            background: #f5edd6;
+            color: #8f721a;
+        }
+        .status-resolved {
+            background: #d4e9e0;
+            color: #1a7a5a;
+        }
+
+        .priority-high {
+            background: #fce4e4;
+            color: #b23b3b;
+        }
+        .priority-medium {
+            background: #fff1d6;
+            color: #a7681a;
+        }
+        .priority-low {
+            background: #ddf0e6;
+            color: #1f6e4a;
+        }
+
+        .notice-desc {
+            color: #4b1f2a;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 6px 0 10px;
+        }
+
+        .notice-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 20px;
+            font-size: 13px;
+            color: #4b1f2a;
+            padding: 8px 0;
+            border-top: 1px solid #d4c8b8;
+        }
+
+        .notice-steps .step i {
+            color: #b08d57;
+            margin-right: 4px;
+        }
+
+        .notice-steps .step .date {
+            color: #8a7a6a;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        .notice-footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #d4c8b8;
+        }
+
+        .notice-footer .ticket-id {
+            font-size: 13px;
+            color: #4b1f2a;
+        }
+
+        .notice-footer .ticket-id i {
+            color: #b08d57;
+            margin-right: 4px;
+        }
+
+        .notice-footer .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-view {
+            background: transparent;
+            color: #4b1f2a;
+            border: 1px solid #4b1f2a;
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn-view:hover {
+            background: #4b1f2a;
+            color: #fff;
+        }
+
+        .btn-delete {
+            background: transparent;
+            color: #b23b3b;
+            border: 1px solid #b23b3b;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background: #b23b3b;
+            color: #fff;
+        }
+
+        .btn-delete i {
+            margin-right: 4px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 35px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-box .modal-icon {
+            font-size: 48px;
+            color: #b23b3b;
+            margin-bottom: 12px;
+        }
+
+        .modal-box h3 {
+            color: #4b1f2a;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .modal-box p {
+            color: #5a4a3a;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .modal-box .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .modal-box .modal-actions button {
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-cancel {
+            background: #f6efe6;
+            color: #4b1f2a;
+            border: 1px solid #d4c8b8;
+        }
+
+        .btn-cancel:hover {
+            background: #e8ddd0;
+        }
+
+        .btn-confirm-delete {
+            background: #b23b3b;
+            color: #fff;
+        }
+
+        .btn-confirm-delete:hover {
+            background: #8a2a2a;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4b1f2a;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 12px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast i {
+            color: #b08d57;
+            font-size: 18px;
+        }
+
+        .toast .undo-btn {
+            background: #b08d57;
+            border: none;
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .toast .undo-btn:hover {
+            background: #9a7a4a;
+        }
+
+        /* Loading & Empty */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            background: #f6efe6;
+            border-radius: 12px;
+        }
+
+        .loading i {
+            font-size: 40px;
+            color: #b08d57;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #5a4a3a;
+            background: #f6efe6;
+            border-radius: 12px;
+        }
+
+        .empty-state i {
+            font-size: 50px;
+            color: #b08d57;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            color: #4b1f2a;
+            margin-bottom: 8px;
+        }
+
+        .empty-state a {
+            display: inline-block;
+            margin-top: 15px;
+            background: #4b1f2a;
+            color: #fff;
+            padding: 10px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+        }
+
+        .empty-state a:hover {
+            background: #b08d57;
+        }
+
+        @media (max-width: 600px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .filter-count { margin-left: 0; }
+            .notice-card { padding: 15px; }
+            .notice-top { flex-direction: column; align-items: flex-start; }
+            .notice-footer { flex-direction: column; align-items: stretch; }
+            .notice-footer .actions { justify-content: flex-end; }
+            .toast { bottom: 15px; right: 15px; left: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1><i class="fas fa-ticket-alt"></i>My Reports</h1>
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            
+            <button class="btn-refresh" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <label><i class="fas fa-filter"></i> Filter:</label>
+        <select id="statusFilter">
+            <option value="all">All Status</option>
+            <option value="open">Open</option>
+            <option value="pending">Pending</option>
+            <option value="resolved">Resolved</option>
+        </select>
+        <select id="priorityFilter">
+            <option value="all">All Priority</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <span class="filter-count" id="ticketCount">0 tickets</span>
+    </div>
+
+    <!-- Tickets -->
+    <div id="noticeBoard" class="notice-board">
+        <div class="loading">
+            <i class="fas fa-spinner"></i>
+            <p style="margin-top: 10px; color: #5a4a3a;">Loading...</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal-box">
+        <div class="modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3>Delete this ticket?</h3>
+        <p>This action cannot be undone. Are you sure?</p>
+        <div class="modal-actions">
+            <button class="btn-cancel" id="cancelDelete">Cancel</button>
+            <button class="btn-confirm-delete" id="confirmDelete">Yes, Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Ticket deleted</span>
+    <button class="undo-btn" id="undoBtn">Undo</button>
+</div>
+
+<script>
+    // =============================================
+    // DATA
+    // =============================================
+    var tickets = [];
+    var deletedTicket = null;
+    var pendingDelete = null;
+    var toastTimer = null;
+
+    function getSampleTickets() {
+        return [
+            {
+                id: 1,
+                title: "Water Pipe Burst on High Street",
+                type: "Water / Plumbing",
+                desc: "Main water line burst near the intersection, flooding the sidewalk.",
+                priority: "High",
+                ward: "Ward 4",
+                address: "1921 High Street, Makhanda",
+                created: "2026-09-07 14:59:15",
+                status: "open",
+                steps: [
+                    { name: "Report submitted", date: "07 Sep 2026 · 14:59" },
+                    { name: "Assigned to maintenance", date: "07 Sep 2026 · 15:30" },
+                    { name: "Work in progress", date: "07 Sep 2026 · 16:15" }
+                ],
+                updated: "2026-09-07 16:15:00"
+            },
+            {
+                id: 2,
+                title: "Electricity Issues on African Street",
+                type: "Electricity / Power Outage",
+                desc: "Power fluctuations affecting multiple households.",
+                priority: "Low",
+                ward: "Ward 2",
+                address: "69 African Street, Makhanda",
+                created: "2026-09-07 17:22:40",
+                status: "pending",
+                steps: [
+                    { name: "Report submitted", date: "07 Sep 2026 · 17:22" },
+                    { name: "Assigned to maintenance", date: "07 Sep 2026 · 18:00" },
+                    { name: "Awaiting parts", date: "08 Sep 2026 · 09:00" }
+                ],
+                updated: "2026-09-08 09:00:00"
+            },
+            {
+                id: 3,
+                title: "Pothole on Mandela Avenue",
+                type: "Roads",
+                desc: "Large pothole causing traffic congestion.",
+                priority: "Medium",
+                ward: "Ward 3",
+                address: "45 Mandela Avenue, Makhanda",
+                created: "2026-09-06 10:30:00",
+                status: "resolved",
+                steps: [
+                    { name: "Report submitted", date: "06 Sep 2026 · 10:30" },
+                    { name: "Assigned to maintenance", date: "06 Sep 2026 · 11:15" },
+                    { name: "Work completed", date: "07 Sep 2026 · 14:00" }
+                ],
+                updated: "2026-09-07 14:00:00"
+            },
+            {
+                id: 4,
+                title: "Sewage Blockage on Hill Street",
+                type: "Sanitation",
+                desc: "Severe sewage blockage causing overflow.",
+                priority: "High",
+                ward: "Ward 1",
+                address: "12 Hill Street, Makhanda",
+                created: "2026-09-05 07:30:00",
+                status: "open",
+                steps: [
+                    { name: "Report submitted", date: "05 Sep 2026 · 07:30" },
+                    { name: "Assigned to maintenance", date: "05 Sep 2026 · 09:00" },
+                    { name: "Work in progress", date: "05 Sep 2026 · 10:45" }
+                ],
+                updated: "2026-09-06 12:00:00"
+            }
+        ];
+    }
+
+    // =============================================
+    // HELPERS
+    // =============================================
+    function formatDate(str) {
+        if (!str) return 'N/A';
+        var d = new Date(str);
+        return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) +
+               ' · ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function getTicketId(id, created) {
+        var year = new Date(created).getFullYear().toString().slice(-2);
+        return '#SR-' + String(id).padStart(4, '0') + '-' + year;
+    }
+
+    // =============================================
+    // RENDER
+    // =============================================
+    function renderTickets(data) {
+        var board = document.getElementById('noticeBoard');
+        var count = document.getElementById('ticketCount');
+
+        if (!data || data.length === 0) {
+            board.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-ticket-alt"></i>
+                    <h3>No reports found</h3>
+                    <p>You haven't submitted any fault reports yet.</p>
+                    <a href="report_fault.html">Report a Fault</a>
+                </div>
+            `;
+            count.textContent = '0 tickets';
+            return;
+        }
+
+        var html = '';
+        for (var i = 0; i < data.length; i++) {
+            var t = data[i];
+            var statusClass = 'status-' + t.status;
+            var priorityClass = 'priority-' + t.priority.toLowerCase();
+            var ticketId = getTicketId(t.id, t.created);
+
+            var stepsHtml = '';
+            var steps = t.steps || [];
+            for (var s = 0; s < steps.length && s < 3; s++) {
+                stepsHtml += `
+                    <span class="step">
+                        <i class="fas fa-check-circle"></i>
+                        ${steps[s].name}
+                        <span class="date">${steps[s].date}</span>
+                    </span>
+                `;
+            }
+
+            html += `
+                <div class="notice-card" data-id="${t.id}" data-status="${t.status}" data-priority="${t.priority.toLowerCase()}">
+                    <div class="notice-top">
+                        <div class="notice-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            ${t.title}
+                        </div>
+                        <div class="notice-tags">
+                            <span class="tag"><i class="fas fa-tag"></i> ${t.type}</span>
+                            <span class="tag"><i class="fas fa-map-pin"></i> ${t.ward}</span>
+                            <span class="tag ${statusClass}"><i class="fas fa-circle" style="font-size: 8px;"></i> ${t.status.charAt(0).toUpperCase() + t.status.slice(1)}</span>
+                            <span class="tag ${priorityClass}">${t.priority}</span>
+                        </div>
+                    </div>
+                    <div class="notice-desc">${t.desc}</div>
+                    <div class="notice-steps">${stepsHtml}</div>
+                    <div class="notice-footer">
+                        <span class="ticket-id"><i class="far fa-clock"></i> ${ticketId} · Updated: ${formatDate(t.updated)}</span>
+                        <div class="actions">
+                            <button class="btn-view" onclick="viewTicket(${t.id})">View →</button>
+                            <button class="btn-delete" onclick="confirmDelete(${t.id})"><i class="fas fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        board.innerHTML = html;
+        count.textContent = data.length + ' ticket' + (data.length > 1 ? 's' : '');
+    }
+
+    // =============================================
+    // FILTER
+    // =============================================
+    function filterTickets() {
+        var status = document.getElementById('statusFilter').value;
+        var priority = document.getElementById('priorityFilter').value;
+        var search = document.getElementById('searchInput').value.toLowerCase();
+
+        var cards = document.querySelectorAll('.notice-card');
+        var visible = 0;
+
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var cardStatus = card.dataset.status;
+            var cardPriority = card.dataset.priority;
+            var title = card.querySelector('.notice-title').textContent.toLowerCase();
+            var id = card.querySelector('.ticket-id').textContent.toLowerCase();
+
+            var show = true;
+            if (status !== 'all' && cardStatus !== status) show = false;
+            if (priority !== 'all' && cardPriority !== priority) show = false;
+            if (search && !title.includes(search) && !id.includes(search)) show = false;
+
+            card.style.display = show ? 'block' : 'none';
+            if (show) visible++;
+        }
+
+        document.getElementById('ticketCount').textContent = visible + ' ticket' + (visible > 1 ? 's' : '');
+    }
+
+    // =============================================
+    // DELETE
+    // =============================================
+    function confirmDelete(id) {
+        pendingDelete = id;
+        document.getElementById('confirmModal').classList.add('show');
+    }
+
+    function performDelete(id) {
+        var index = -1;
+        for (var i = 0; i < tickets.length; i++) {
+            if (tickets[i].id === id) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index === -1) return;
+
+        deletedTicket = {
+            ticket: tickets[index],
+            index: index
+        };
+
+        tickets.splice(index, 1);
+        renderTickets(tickets);
+
+        // Show toast with undo
+        var toast = document.getElementById('toast');
+        document.getElementById('toastMessage').textContent = 'Ticket deleted';
+        document.getElementById('undoBtn').style.display = 'inline-block';
+        toast.classList.add('show');
+
+        if (toastTimer) clearTimeout(toastTimer);
+    }
+
+    function undoDelete() {
+        if (!deletedTicket) return;
+
+        tickets.splice(deletedTicket.index, 0, deletedTicket.ticket);
+        deletedTicket = null;
+
+        renderTickets(tickets);
+
+        var toast = document.getElementById('toast');
+        document.getElementById('toastMessage').textContent = 'Ticket restored';
+        document.getElementById('undoBtn').style.display = 'none';
+        toast.classList.add('show');
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // =============================================
+    // VIEW
+    // =============================================
+    window.viewTicket = function(id) {
+        alert('Viewing ticket #SR-' + String(id).padStart(4, '0'));
+    };
+
+    // =============================================
+    // FETCH DATA
+    // =============================================
+    function fetchTickets() {
+        var board = document.getElementById('noticeBoard');
+        board.innerHTML = `
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p style="margin-top: 10px; color: #5a4a3a;">Loading...</p>
+            </div>
+        `;
+
+        // Simulate AJAX call
+        setTimeout(function() {
+            tickets = getSampleTickets();
+            renderTickets(tickets);
+        }, 400);
+    }
+
+    // =============================================
+    // INIT
+    // =============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchTickets();
+
+        // Modal events
+        document.getElementById('cancelDelete').addEventListener('click', function() {
+            document.getElementById('confirmModal').classList.remove('show');
+            pendingDelete = null;
+        });
+
+        document.getElementById('confirmDelete').addEventListener('click', function() {
+            if (pendingDelete !== null) {
+                performDelete(pendingDelete);
+                document.getElementById('confirmModal').classList.remove('show');
+                pendingDelete = null;
+            }
+        });
+
+        document.getElementById('confirmModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('show');
+                pendingDelete = null;
+            }
+        });
+
+        // Undo
+        document.getElementById('undoBtn').addEventListener('click', undoDelete);
+
+        // Refresh
+        document.getElementById('refreshBtn').addEventListener('click', function() {
+            var btn = this;
+            var original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Loading...';
+            btn.disabled = true;
+
+            fetchTickets();
+
+            setTimeout(function() {
+                btn.innerHTML = '<i class="fas fa-check"></i> Done';
+                btn.disabled = false;
+                setTimeout(function() {
+                    btn.innerHTML = original;
+                }, 1000);
+            }, 600);
+        });
+
+        // Filters
+        document.getElementById('statusFilter').addEventListener('change', filterTickets);
+        document.getElementById('priorityFilter').addEventListener('change', filterTickets);
+        document.getElementById('searchInput').addEventListener('input', filterTickets);
+    });
+</script>
+
+</body>
+</html>
